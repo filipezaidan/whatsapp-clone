@@ -5,29 +5,31 @@ export const Wrapper = styled.div`
     flex: 1;
     background-color: #FFF;
     overflow-y: auto;
-`
 
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.2)
+    }
+`
 export const Container = styled.div`
     display: flex;
     align-items: center;
     height: 70px;
     cursor: pointer;
-`
-export const Avatar = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-left: 15px;
+    margin-left:15px;
 `
 export const Lines = styled.div`
     flex: 1;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-bottom: 1px solid #EEE;
     padding-right: 15px;
     margin-left: 15px;
-
     flex-wrap: wrap;
     min-width: 0;
 `

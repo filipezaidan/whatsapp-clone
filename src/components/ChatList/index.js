@@ -1,4 +1,6 @@
-
+//Components
+import Avatar from '../Avatar';
+//Styles
 import * as S from './styles'
 
 export function ChatList({ children }) {
@@ -9,12 +11,13 @@ export function ChatList({ children }) {
     );
 }
 
-
 export function ChatListItem() {
     return (
         <S.Container>
-            <S.Avatar 
+            <Avatar 
                 src='https://avatars.githubusercontent.com/u/41112779?v=4'
+                width={50}
+                height={50}
             />
             <S.Lines>
                 <S.Line>
