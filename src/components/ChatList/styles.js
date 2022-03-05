@@ -19,7 +19,12 @@ export const Container = styled.div`
     align-items: center;
     height: 70px;
     cursor: pointer;
-    margin-left:15px;
+    padding-left: 15px;
+    background-color: ${props => props.active && "#EBEBEB"};
+
+    &&:hover{
+        background-color:#EBEBEB
+    }
 `
 export const Lines = styled.div`
     flex: 1;
