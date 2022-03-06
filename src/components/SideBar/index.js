@@ -7,19 +7,21 @@ import { ChatList, ChatListItem } from '../../components/ChatList';
 //styles
 import * as S from './styles';
 
-export default function SideBar({ setMessage }) {
+export default function SideBar({ setMessage, setContact }) {
 
     const [listMessages, setListMessages] = useState([
-        { id: 1, },
-        { id: 2, },
-        { id: 3, },
-        { id: 4, },
+        { id: 1, name: "Filipe Zaidan",  },
+        { id: 2, name: "Filipe Zaidan 2", },
+        { id: 3, name: "Filipe Zaidan 3",},
+        { id: 4, name: "Filipe Zaidan 4",},
     ])
 
     const [activeMessage, setActiveMenssage] = useState(null);
 
     useEffect(() => {
         setMessage(Boolean(activeMessage))
+        console.log("active:",activeMessage)
+        setContact(activeMessage)
     }, [activeMessage])
 
     return (
