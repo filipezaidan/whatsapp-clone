@@ -1,5 +1,5 @@
 //Libraries
-import { useState} from 'react';
+import { useState } from 'react';
 //Components
 import SideBar from '../../components/SideBar';
 import Content from '../../components/Content';
@@ -12,7 +12,7 @@ export default function Home() {
 
     return (
         <S.Container>
-            <SideBar 
+            <SideBar
                 setMessage={setMessage}
                 setContact={setContact}
             />

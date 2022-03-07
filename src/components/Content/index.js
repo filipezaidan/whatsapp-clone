@@ -1,7 +1,6 @@
 //Components
 import ChatIntro from '../../components/ChatIntro';
 import ChatWindow from '../ChatWindow';
-
 //Styles
 import * as S from './styles'
 
