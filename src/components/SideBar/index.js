@@ -6,6 +6,7 @@ import Search from '../../components/Search';
 import { ChatList, ChatListItem } from '../../components/ChatList';
 //styles
 import * as S from './styles';
+import NewChat from '../NewChat';
 
 export default function SideBar({ setMessage, setContact }) {
 
@@ -15,8 +16,8 @@ export default function SideBar({ setMessage, setContact }) {
         { id: 3, name: "Filipe Zaidan 3",},
         { id: 4, name: "Filipe Zaidan 4",},
     ])
-
     const [activeMessage, setActiveMenssage] = useState(null);
+    const [isShowNewChat, setIsShowNewChat] = useState(false);
 
     useEffect(() => {
         setMessage(Boolean(activeMessage))
@@ -26,7 +27,13 @@ export default function SideBar({ setMessage, setContact }) {
 
     return (
         <S.Container>
-            <Header />
+            <NewChat
+                show={isShowNewChat}
+                setShow={setIsShowNewChat}
+            />
+            <Header 
+                setShowNewChat={setIsShowNewChat}
+            />
             <Search />
             <ChatList>
                 {listMessages.map((item, key) => (

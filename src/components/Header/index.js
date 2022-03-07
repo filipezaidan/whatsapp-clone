@@ -5,7 +5,7 @@ import Buttons from '../Buttons';
 import * as S from './styles';
 
 
-export default function Header() {
+export default function Header({setShowNewChat}) {
     return (
         <S.Container>
             <Avatar
@@ -13,7 +13,9 @@ export default function Header() {
                 width={40}
                 height={40}
             />
-            <Buttons/>
+            <Buttons
+                showChat={setShowNewChat}
+            />
         </S.Container>
     );
 }
