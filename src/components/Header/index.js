@@ -5,11 +5,11 @@ import Buttons from '../Buttons';
 import * as S from './styles';
 
 
-export default function Header({setShowNewChat}) {
+export default function Header({ avatar, setShowNewChat }) {
     return (
         <S.Container>
             <Avatar
-                src='https://avatars.githubusercontent.com/u/41112779?v=4'
+                src={avatar}
                 width={40}
                 height={40}
             />

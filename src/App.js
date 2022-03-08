@@ -1,12 +1,16 @@
-import Home from "./pages/Home";
+//Libraries
+import { BrowserRouter } from 'react-router-dom';
+//Contexts
+import AuthProvider from './contexts/auth';
+//Routes
+import Routes from './routes'
 
-
-
-
-function App() {
+export default function App() {
   return (
-    <Home/>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
-
-export default App;

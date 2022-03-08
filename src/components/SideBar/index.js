@@ -1,37 +1,42 @@
 //Libraries
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 //Components
 import Header from '../../components/Header';
 import Search from '../../components/Search';
 import { ChatList, ChatListItem } from '../../components/ChatList';
+//Context
+import { AuthContext } from '../../contexts/auth';
 //styles
 import * as S from './styles';
 import NewChat from '../NewChat';
 
 export default function SideBar({ setMessage, setContact }) {
+    const { user } = useContext(AuthContext);
 
     const [listMessages, setListMessages] = useState([
-        { id: 1, name: "Filipe Zaidan",  },
+        { id: 1, name: "Filipe Zaidan", },
         { id: 2, name: "Filipe Zaidan 2", },
-        { id: 3, name: "Filipe Zaidan 3",},
-        { id: 4, name: "Filipe Zaidan 4",},
+        { id: 3, name: "Filipe Zaidan 3", },
+        { id: 4, name: "Filipe Zaidan 4", },
     ])
     const [activeMessage, setActiveMenssage] = useState(null);
     const [isShowNewChat, setIsShowNewChat] = useState(false);
 
     useEffect(() => {
         setMessage(Boolean(activeMessage))
-        console.log("active:",activeMessage)
         setContact(activeMessage)
     }, [activeMessage])
 
     return (
         <S.Container>
             <NewChat
+                chatlist={""}
+                user={user}
                 show={isShowNewChat}
                 setShow={setIsShowNewChat}
             />
-            <Header 
+            <Header
+                avatar={user.avatar}
                 setShowNewChat={setIsShowNewChat}
             />
             <Search />
