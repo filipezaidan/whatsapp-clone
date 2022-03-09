@@ -25,10 +25,11 @@ export default function ChatWindow({data}) {
     const [message, setMessage] = useState('');
     const [listMessages, setListMessages] = useState([]);
     const [listening, setListening] = useState(false);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         setListMessages([]);
-        let unsub = api.onChatContent(data.chatId, setListMessages);
+        let unsub = api.onChatContent(data.chatId, setListMessages, setUsers);
         return unsub;
     }, [data.chatId])
 
@@ -51,11 +52,18 @@ export default function ChatWindow({data}) {
     }
     const handleSendClick = () => {
         if(message){
-            api.sendMessage(data, user.id, 'text', message);
+            api.sendMessage(data, user.id, 'text', message, users);
             setMessage('');
             setIsOpenEmoji(false);
         }
     }
+
+    const handleInputKey = (e) => {
+        if(e.keyCode === 13){
+            handleSendClick();
+        }
+    }
+
 
     const handleMicClick = () => {
         if (recognition) {
@@ -72,6 +80,7 @@ export default function ChatWindow({data}) {
         }
     }
 
+    
     return (
         <S.Container>
             <S.Header>
@@ -158,6 +167,7 @@ export default function ChatWindow({data}) {
                         placeholder="Mensagem"
                         value={message}
                         onChange={e => setMessage(e.target.value)}
+                        onKeyUp={handleInputKey}
                     />
                 </S.InputArea>
 
@@ -168,6 +178,7 @@ export default function ChatWindow({data}) {
                                 size={25}
                                 color="#54656f"
                                 onClick={handleSendClick}
+                              
                             />
                         </S.Button>
                         :

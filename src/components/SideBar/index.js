@@ -15,7 +15,6 @@ import NewChat from '../NewChat';
 export default function SideBar({ setMessage, setChatSelect }) {
     const { user } = useContext(AuthContext);
 
-    const [chatList, setChatList] = useState([])
     const [listMessages, setListMessages] = useState([])
     const [activeChat, setActiveChat] = useState(null);
     const [isShowNewChat, setIsShowNewChat] = useState(false);
@@ -35,7 +34,6 @@ export default function SideBar({ setMessage, setChatSelect }) {
     return (
         <S.Container>
             <NewChat
-                chatlist={chatList}
                 user={user}
                 show={isShowNewChat}
                 setShow={setIsShowNewChat}
