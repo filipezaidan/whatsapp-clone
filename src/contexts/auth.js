@@ -27,7 +27,6 @@ export default function AuthProvider({ children }) {
     }
 
     async function createUser(user) {
-        console.log("user id:", user.id)
         await firebase
         .firestore()
         .collection('users')

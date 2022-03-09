@@ -4,7 +4,6 @@ import utils from '../../utils/functions'
 import * as S from './styles'
 
 export default function MessageItem({ data, user }) {
-    console.log(data)
     return (
         <S.Wrapper
             style={{
