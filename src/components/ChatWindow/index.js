@@ -6,6 +6,8 @@ import * as I from 'react-icons/md'
 import MessageItem from '../MessageItem';
 //Contexts
 import { AuthContext } from '../../contexts/auth'
+//Services
+import api from '../../services/api';
 //Styles
 import * as S from './styles'
 
@@ -25,6 +27,12 @@ export default function ChatWindow({data}) {
     const [listening, setListening] = useState(false);
 
     useEffect(() => {
+        setListMessages([]);
+        let unsub = api.onChatContent(data.chatId, setListMessages);
+        return unsub;
+    }, [data.chatId])
+
+    useEffect(() => {
         //It Have ScrollBar
         if (body.current.scrollHeight > body.current.offsetHeight) {
             //Open in the last Message
@@ -35,17 +43,18 @@ export default function ChatWindow({data}) {
     const handleEmojiClick = (e, emojiObject) => {
         setMessage(message => message + emojiObject.emoji)
     }
-
     const handleOpenEmoji = () => {
         setIsOpenEmoji(true)
     }
-
     const handleCloseEmoji = () => {
         setIsOpenEmoji(false)
     }
-
     const handleSendClick = () => {
-        // setListMessages(prevState => [...prevState, ])
+        if(message){
+            api.sendMessage(data, user.id, 'text', message);
+            setMessage('');
+            setIsOpenEmoji(false);
+        }
     }
 
     const handleMicClick = () => {
@@ -97,7 +106,7 @@ export default function ChatWindow({data}) {
                     <MessageItem
                         key={key}
                         data={item}
-                        user={user.id}
+                        user={user}
                     />
                 ))}
             </S.Body>

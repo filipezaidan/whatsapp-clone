@@ -18,7 +18,6 @@ export default function NewChat({ user, show, setShow }) {
 
     const handleAddNewChat = async (contactSelect) => {
         await api.addNewChat(user, contactSelect)
-
         handleClose();
     }
 
@@ -37,7 +36,7 @@ export default function NewChat({ user, show, setShow }) {
 
             </S.Header>
             <S.List>
-                {list.length > 0 && list.map((item, key) => (
+                {list.length && list.map((item, key) => (
                     <S.Contact
                         key={key}
                         onClick={() => handleAddNewChat(item)}

@@ -74,7 +74,9 @@ export default {
         })
     },
     sendMessage: async (chatData, userId, type, body) => {
-        db.collection('chats').doc(chatData.id).update({
+        console.log('userId', userId);
+        console.log(chatData)
+        db.collection('chats').doc(chatData.chatId).update({
             messages: firebase.firestore.FieldValue.arrayUnion({
                 type,
                 author: userId,

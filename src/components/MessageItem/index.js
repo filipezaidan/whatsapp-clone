@@ -15,7 +15,7 @@ export default function MessageItem({ data, user }) {
                         "#DCF8C6" : "#FFF"
                 }}
             >
-                <S.Text>{data.message}</S.Text>
+                <S.Text>{data.body}</S.Text>
                 <S.Date>19:00</S.Date>
             </S.Container>
         </S.Wrapper>
