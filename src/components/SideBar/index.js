@@ -6,31 +6,36 @@ import Search from '../../components/Search';
 import { ChatList, ChatListItem } from '../../components/ChatList';
 //Context
 import { AuthContext } from '../../contexts/auth';
+//Services
+import api from '../../services/api';
 //styles
 import * as S from './styles';
 import NewChat from '../NewChat';
 
-export default function SideBar({ setMessage, setContact }) {
+export default function SideBar({ setMessage, setChatSelect }) {
     const { user } = useContext(AuthContext);
 
-    const [listMessages, setListMessages] = useState([
-        { id: 1, name: "Filipe Zaidan", },
-        { id: 2, name: "Filipe Zaidan 2", },
-        { id: 3, name: "Filipe Zaidan 3", },
-        { id: 4, name: "Filipe Zaidan 4", },
-    ])
-    const [activeMessage, setActiveMenssage] = useState(null);
+    const [chatList, setChatList] = useState([])
+    const [listMessages, setListMessages] = useState([])
+    const [activeChat, setActiveChat] = useState(null);
     const [isShowNewChat, setIsShowNewChat] = useState(false);
 
     useEffect(() => {
-        setMessage(Boolean(activeMessage))
-        setContact(activeMessage)
-    }, [activeMessage])
+        if(user){
+            let unsub = api.onChatList(user.id, setListMessages)
+            return unsub;
+        }
+    }, [user])
+    
+    useEffect(() => {
+        setMessage(Boolean(activeChat))
+        setChatSelect(activeChat)
+    }, [activeChat])
 
     return (
         <S.Container>
             <NewChat
-                chatlist={""}
+                chatlist={chatList}
                 user={user}
                 show={isShowNewChat}
                 setShow={setIsShowNewChat}
@@ -44,8 +49,9 @@ export default function SideBar({ setMessage, setContact }) {
                 {listMessages.map((item, key) => (
                     <ChatListItem
                         key={key}
-                        active={activeMessage?.id === listMessages[key].id}
-                        onClick={() => setActiveMenssage(listMessages[key])}
+                        data={item}
+                        active={activeChat?.chatId === listMessages[key]?.chatId}
+                        onClick={() => setActiveChat(listMessages[key])}
                     />
                 ))}
             </ChatList>

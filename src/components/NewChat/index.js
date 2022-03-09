@@ -1,18 +1,26 @@
-
 //Libraries
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as I from 'react-icons/md';
+//Services
+import api from '../../services/api'
 //Styles
 import * as S from './styles';
 
-export default function NewChat({ show, setShow }) {
-    const [list, setList] = useState([
-        { id: 123, name: "Filipe Zaidan", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLZal2ngrRXdEebFSXKENv_Joj38zpGXhwA&usqp=CAU" },
-        { id: 123, name: "Filipe Zaidan", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLZal2ngrRXdEebFSXKENv_Joj38zpGXhwA&usqp=CAU" },
-        { id: 123, name: "Filipe Zaidan", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLZal2ngrRXdEebFSXKENv_Joj38zpGXhwA&usqp=CAU" },
-        { id: 123, name: "Filipe Zaidan", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLZal2ngrRXdEebFSXKENv_Joj38zpGXhwA&usqp=CAU" },
-        { id: 123, name: "Filipe Zaidan", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLZal2ngrRXdEebFSXKENv_Joj38zpGXhwA&usqp=CAU" },
-    ])
+export default function NewChat({ user, show, setShow }) {
+    const [list, setList] = useState([])
+
+    useEffect(async () => {
+        if (user) {
+            const contacts = await api.getListContacts(user.id)
+            setList(contacts)
+        }
+    }, [user])
+
+    const handleAddNewChat = async (contactSelect) => {
+        await api.addNewChat(user, contactSelect)
+
+        handleClose();
+    }
 
     const handleClose = () => {
         setShow(false);
@@ -29,8 +37,11 @@ export default function NewChat({ show, setShow }) {
 
             </S.Header>
             <S.List>
-                {list.map((item, key) => (
-                    <S.Contact key={key}>
+                {list.length > 0 && list.map((item, key) => (
+                    <S.Contact
+                        key={key}
+                        onClick={() => handleAddNewChat(item)}
+                    >
                         <S.ContactAvatar src={item.avatar} />
                         <S.ContactName>{item.name}</S.ContactName>
                     </S.Contact>

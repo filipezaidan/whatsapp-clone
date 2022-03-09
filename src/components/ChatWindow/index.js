@@ -1,15 +1,17 @@
 //Libraries
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import * as I from 'react-icons/md'
 //Components
 import MessageItem from '../MessageItem';
-//Assets 
-import image from '../../assets/whatsapp-telephone.jpg'
+//Contexts
+import { AuthContext } from '../../contexts/auth'
 //Styles
 import * as S from './styles'
 
-export default function ChatWindow(contact) {
+export default function ChatWindow({data}) {
+    const { user } = useContext(AuthContext)
+
     const body = useRef();
     let recognition = null;
     let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -17,52 +19,18 @@ export default function ChatWindow(contact) {
         recognition = new SpeechRecognition();
     }
 
-    const [userSelect, setUserSelect] = useState({})
     const [isOpenEmoji, setIsOpenEmoji] = useState(false)
     const [message, setMessage] = useState('');
-    const [listMessages, setListMessages] = useState([
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-        {author: 123, message: "Eaeee doutor"},
-        {author: 123, message: "Blzzz?"},
-        {author: 1234, message: "eAAe"},
-        {author: 1234, message: "tudo em ordem trutaA"},
-    ]);
+    const [listMessages, setListMessages] = useState([]);
     const [listening, setListening] = useState(false);
 
     useEffect(() => {
         //It Have ScrollBar
-        if(body.current.scrollHeight > body.current.offsetHeight){
+        if (body.current.scrollHeight > body.current.offsetHeight) {
             //Open in the last Message
             body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight;
         }
     }, [listMessages])
-
-    useEffect(() => {
-        setUserSelect(contact.contact)
-    }, [contact])
 
     const handleEmojiClick = (e, emojiObject) => {
         setMessage(message => message + emojiObject.emoji)
@@ -95,14 +63,12 @@ export default function ChatWindow(contact) {
         }
     }
 
-    
-
     return (
         <S.Container>
             <S.Header>
                 <S.HeaderInfo>
-                    <S.Avatar src={image} />
-                    <S.Name>{userSelect.name}</S.Name>
+                    <S.Avatar src={data.image} />
+                    <S.Name>{data.title}</S.Name>
                 </S.HeaderInfo>
 
                 <S.HeaderButtons>
@@ -131,7 +97,7 @@ export default function ChatWindow(contact) {
                     <MessageItem
                         key={key}
                         data={item}
-                        user={{id: 1234}}
+                        user={user.id}
                     />
                 ))}
             </S.Body>

@@ -1,3 +1,5 @@
+//Libraries
+import { useState, useEffect } from 'react'
 //Components
 import Avatar from '../Avatar';
 //Styles
@@ -11,28 +13,40 @@ export function ChatList({ children }) {
     );
 }
 
-export function ChatListItem({ active, onClick }) {
+export function ChatListItem({ active, onClick, data }) {
+    const [time, setTime] = useState('');
+
+    useEffect(() => {
+        if (data.lastMessageDate > 0) {
+            let date = new Date(data.lastMessageDate.seconds * 1000);
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+
+            setTime(`${hours}:${minutes}`)
+        }
+    }, [data])
+
     return (
         <S.Container
             active={active}
             onClick={onClick}
         >
             <Avatar
-                src='https://avatars.githubusercontent.com/u/41112779?v=4'
+                src={data.image}
                 width={50}
                 height={50}
             />
             <S.Lines>
                 <S.Line>
-                    <S.Name>Filipe Zaidan</S.Name>
-                    <S.Date>22:00</S.Date>
+                    <S.Name>{data.title}</S.Name>
+                    <S.Date>{time}</S.Date>
                 </S.Line>
                 <S.Line>
                     <S.Message>
-
-                        <S.TextMessage>
-                            asasaaasasssasaasasasasasasasasasasasasasassasassasaasasasasassasassasasasasas
-                        </S.TextMessage>
+                        <S.TextMessage>{data.lastMessage}</S.TextMessage>
                     </S.Message>
                 </S.Line>
             </S.Lines>

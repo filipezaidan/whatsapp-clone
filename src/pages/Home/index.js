@@ -8,17 +8,17 @@ import * as  S from './styles'
 
 export default function Home() {
     const [isMessage, setMessage] = useState(false)
-    const [contact, setContact] = useState()
+    const [chat, setChat] = useState()
 
     return (
         <S.Container>
             <SideBar
                 setMessage={setMessage}
-                setContact={setContact}
+                setChatSelect={setChat}
             />
             <Content
                 isMessage={isMessage}
-                contact={contact}
+                isChat={chat}
             />
         </S.Container>
     );

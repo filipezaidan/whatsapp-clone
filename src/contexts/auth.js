@@ -26,19 +26,31 @@ export default function AuthProvider({ children }) {
         localStorage.setItem('@WhatsAppClone', JSON.stringify(data));
     }
 
+    async function createUser(user) {
+        console.log("user id:", user.id)
+        await firebase
+        .firestore()
+        .collection('users')
+        .doc(user.id)
+        .set(user, { merge: true })
+    }
+
     async function githubSignIn() {
         setLoadingAuth(true);
         const provider = new firebase.auth.GithubAuthProvider();
         let { user } = await firebase.auth().signInWithPopup(provider);
 
-        let data = {
-            id: user.uid,
-            name: user.displayName,
-            avatar: user.photoURL,
+        if(user){
+            let data = {
+                id: user.uid,
+                name: user.displayName,
+                avatar: user.photoURL,
+            }
+            createUser(data);
+            setUser(data);
+            storageUser(data);
+            setLoadingAuth(false)
         }
-        setUser(data);
-        storageUser(data);
-        setLoadingAuth(false)
     }
 
     async function signOut() {

@@ -36,7 +36,6 @@ export const HeaderTitle = styled.span`
     color: #FFF;
     margin-left: 20px;
 `
-
 export const List = styled.div`
     flex: 1;
     overflow-y: auto;

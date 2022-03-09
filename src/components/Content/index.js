@@ -4,12 +4,12 @@ import ChatWindow from '../ChatWindow';
 //Styles
 import * as S from './styles'
 
-export default function Content({ isMessage, contact }) {
+export default function Content({ isMessage, isChat }) {
     return (
         <S.Container>
             {isMessage ?
                 <ChatWindow
-                    contact={contact}
+                    data={isChat}
                 />
                 :
                 <ChatIntro />
