@@ -64,7 +64,6 @@ export default function ChatWindow({data}) {
         }
     }
 
-
     const handleMicClick = () => {
         if (recognition) {
             recognition.onstart = () => {
@@ -79,7 +78,6 @@ export default function ChatWindow({data}) {
             recognition.start();
         }
     }
-
     
     return (
         <S.Container>

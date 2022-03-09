@@ -4,7 +4,6 @@ import Buttons from '../Buttons';
 //Styles
 import * as S from './styles';
 
-
 export default function Header({ avatar, setShowNewChat }) {
     return (
         <S.Container>

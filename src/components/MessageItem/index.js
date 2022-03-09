@@ -1,7 +1,10 @@
+//Utils
+import utils from '../../utils/functions'
 //Styles
 import * as S from './styles'
 
 export default function MessageItem({ data, user }) {
+    console.log(data)
     return (
         <S.Wrapper
             style={{
@@ -16,7 +19,7 @@ export default function MessageItem({ data, user }) {
                 }}
             >
                 <S.Text>{data.body}</S.Text>
-                <S.Date>19:00</S.Date>
+                <S.Date>{utils.handleGenerateTimeHours(data.date)}</S.Date>
             </S.Container>
         </S.Wrapper>
     );

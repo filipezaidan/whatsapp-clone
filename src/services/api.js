@@ -1,5 +1,6 @@
+//Libraries
 import firebase from '../services/firebase';
-
+//Const Global
 const db = firebase.firestore();
 
 export default {

@@ -1,13 +1,12 @@
-import * as S from './styles'
+//Assets
 import image from '../../assets/whatsapp-telephone.jpg'
-
+//Styles
+import * as S from './styles'
 
 export default function ChatIntro() {
     return (
         <S.Container>
-            <S.Image
-                src={image}
-            />
+            <S.Image src={image}/>
 
             <S.Title>Mantenha seu celular conectado</S.Title>
             <S.Subtitle>

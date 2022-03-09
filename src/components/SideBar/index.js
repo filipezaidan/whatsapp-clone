@@ -8,7 +8,7 @@ import { ChatList, ChatListItem } from '../../components/ChatList';
 import { AuthContext } from '../../contexts/auth';
 //Services
 import api from '../../services/api';
-//styles
+//Styles
 import * as S from './styles';
 import NewChat from '../NewChat';
 

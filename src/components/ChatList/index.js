@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 //Components
 import Avatar from '../Avatar';
+//Utils
+import utils from '../../utils/functions';
 //Styles
 import * as S from './styles'
 
@@ -18,14 +20,7 @@ export function ChatListItem({ active, onClick, data }) {
 
     useEffect(() => {
         if (data.lastMessageDate > 0) {
-            let date = new Date(data.lastMessageDate.seconds * 1000);
-            let hours = date.getHours();
-            let minutes = date.getMinutes();
-
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-
-            setTime(`${hours}:${minutes}`)
+            setTime(utils.handleGenerateTimeHours(data.lastMessageDate.seconds))
         }
     }, [data])
 
