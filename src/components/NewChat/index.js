@@ -36,7 +36,7 @@ export default function NewChat({ user, show, setShow }) {
 
             </S.Header>
             <S.List>
-                {list.length && list.map((item, key) => (
+                {list.map((item, key) => (
                     <S.Contact
                         key={key}
                         onClick={() => handleAddNewChat(item)}
