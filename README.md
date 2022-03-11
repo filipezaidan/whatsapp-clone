@@ -17,7 +17,7 @@
 
 </p>
 <h1 align="center">
-    <img alt="WhatsAppClone" title="#WhatsAppClone" src="./assets/whatsapp-wallpaper" />
+    <img alt="WhatsAppClone" title="#WhatsAppClone" src="https://github.com/filipezaidan/whatsapp-clone/blob/master/src/assets/whatsapp-wallpaper.jpg"  width="600px;" />
 </h1>
 
 
@@ -57,7 +57,7 @@
 ### Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="Chat WhatsAppClone" title="#ChatWhatsAppClone" src="./assets/whatsapp-example" width="600px">
+  <img alt="Chat WhatsAppClone" title="#ChatWhatsAppClone" src="https://github.com/filipezaidan/whatsapp-clone/blob/master/src/assets/chat-example.png" width="600px">
 </p>
 
 ---
